@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+version := $(shell dpkg-parsechangelog | grep '^Version:' | cut -d' ' -f2 | cut -d- -f1)
+
+%:
+	dh $@
+
+debian/snd-usb-audio-dkms.dkms: debian/snd-usb-audio-dkms.dkms.in
+	sed s/@VERSION@/$(version)/g $< > $@
+
+override_dh_clean:
+	dh_clean debian/snd-usb-audio-dkms.dkms
+
+override_dh_auto_build:
+	:
+
+override_dh_auto_install: debian/snd-usb-audio-dkms.dkms
+	dh_install sound/ patches/ /usr/src/snd-usb-audio-$(version)/
+	dh_dkms
+
+override_dh_auto_install_indep: debian/snd-usb-audio-dkms.dkms

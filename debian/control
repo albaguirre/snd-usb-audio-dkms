@@ -1,0 +1,11 @@
+Source: snd-usb-audio-dkms
+Section: misc
+Priority: optional
+Maintainer: Alberto Aguirre <alberto.aguirre@canonical.com>
+Build-Depends: debhelper (>= 9), dkms
+Standards-Version: 3.9.8
+
+Package: snd-usb-audio-dkms
+Architecture: all
+Depends: ${misc:Depends}, dkms
+Description: Snapshot of ALSA usb-audio kernel module

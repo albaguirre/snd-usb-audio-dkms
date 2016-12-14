@@ -1,0 +1,5 @@
+snd-usb-audio-dkms (4.9) yakkety; urgency=medium
+
+  * Initial packaging.
+
+ -- Alberto Aguirre <alberto.aguirre@canonical.com>  Tue, 13 Dec 2016 11:04:57 -0600
