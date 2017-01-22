@@ -1,3 +1,9 @@
+snd-usb-audio-dkms (4.10-rc5) zesty; urgency=medium
+
+  * Sync snd-usb-audio source to 4.10-rc5
+
+ -- Alberto Aguirre <alberto.aguirre@canonical.com>  Sun, 22 Jan 2017 17:38:08 -0600
+
 snd-usb-audio-dkms (4.9) yakkety; urgency=medium
 
   * Initial packaging.
