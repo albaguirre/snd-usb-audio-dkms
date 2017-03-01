@@ -1,3 +1,9 @@
+snd-usb-audio-dkms (4.10-ubuntu2) xenial; urgency=medium
+
+  * Sync snd-usb-audio source to 4.10
+
+ -- Alberto Aguirre <alberto.aguirre@canonical.com>  Wed, 01 Mar 2017 11:42:18 -0600
+
 snd-usb-audio-dkms (4.10-rc5ubuntu1) zesty; urgency=medium
 
   * Fix debian rules
