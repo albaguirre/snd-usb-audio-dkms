@@ -1,3 +1,10 @@
+snd-usb-audio-dkms (4.13) artful; urgency=medium
+
+  * Sync snd-usb-audio source to 4.13
+  * Add patch to support Axe-Fx III
+
+ -- Alberto Aguirre <alberto.aguirre@canonical.com>  Mon, 16 Apr 2018 17:41:03 -0500
+
 snd-usb-audio-dkms (4.10-ubuntu2) xenial; urgency=medium
 
   * Sync snd-usb-audio source to 4.10

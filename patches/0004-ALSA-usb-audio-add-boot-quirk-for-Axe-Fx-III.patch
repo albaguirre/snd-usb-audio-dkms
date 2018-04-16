@@ -1,0 +1,62 @@
+From 98092c09bf1547e9eaf04b6aebf082ad7db1c3cc Mon Sep 17 00:00:00 2001
+From: Alberto Aguirre <albaguirre@gmail.com>
+Date: Wed, 18 Apr 2018 12:50:34 -0500
+Subject: [PATCH 4/4] ALSA: usb-audio: add boot quirk for Axe-Fx III
+
+Wait for Axe-Fx III to fully bootup before initializing card.
+
+Signed-off-by: Alberto Aguirre <albaguirre@gmail.com>
+---
+ sound/usb/quirks.c | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
+index 5d2a63248b1d..ec532e18a330 100644
+--- a/sound/usb/quirks.c
++++ b/sound/usb/quirks.c
+@@ -852,6 +852,33 @@ static int snd_usb_mbox2_boot_quirk(struct usb_device *dev)
+ 	return 0; /* Successful boot */
+ }
+ 
++static int snd_usb_axefx3_boot_quirk(struct usb_device *dev)
++{
++	int err;
++
++	dev_dbg(&dev->dev, "Waiting for Axe-Fx III to boot up...\n");
++
++	/* If the Axe-Fx III has not fully booted, it will timeout when trying to
++	 * enable the audio streaming interface. A more generous timeout is used
++	 * here to detect when the Axe-Fx 3 has finished booting as it will ack
++	 * this control message once it has */
++	err = usb_control_msg(dev, usb_sndctrlpipe(dev, 0), USB_REQ_SET_INTERFACE,
++						USB_RECIP_INTERFACE, 1, 1, NULL, 0, 120000);
++	if (err < 0)
++	{
++		dev_dbg(&dev->dev, "failed waiting for Axe-Fx III to boot up\n");
++		return err;
++	}
++
++	dev_dbg(&dev->dev, "Axe-Fx III is now ready\n");
++
++	err = usb_set_interface(dev, 1, 0);
++	if (err < 0)
++		dev_dbg(&dev->dev, "error stopping Axe-Fx III interface\n");
++
++	return 0;
++}
++
+ /*
+  * Setup quirks
+  */
+@@ -1027,6 +1054,8 @@ int snd_usb_apply_boot_quirk(struct usb_device *dev,
+ 		return snd_usb_fasttrackpro_boot_quirk(dev);
+ 	case USB_ID(0x047f, 0xc010): /* Plantronics Gamecom 780 */
+ 		return snd_usb_gamecon780_boot_quirk(dev);
++	case USB_ID(0x2466, 0x8010): /* Fractal Audio Axe-Fx 3 */
++		return snd_usb_axefx3_boot_quirk(dev);
+ 	}
+ 
+ 	return 0;
+-- 
+2.14.1
+

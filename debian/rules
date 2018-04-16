@@ -15,7 +15,7 @@ override_dh_auto_build:
 	:
 
 override_dh_auto_install: debian/snd-usb-audio-dkms.dkms
-	dh_install sound/ /usr/src/snd-usb-audio-$(version)/
+	dh_install sound/ patches/ /usr/src/snd-usb-audio-$(version)/
 	dh_dkms
 
 override_dh_auto_install_indep: debian/snd-usb-audio-dkms.dkms

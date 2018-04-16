@@ -1,0 +1,32 @@
+From d11e2d76de511855031341dfa2b6342ec8705a1c Mon Sep 17 00:00:00 2001
+From: Alberto Aguirre <albaguirre@gmail.com>
+Date: Wed, 18 Apr 2018 12:47:22 -0500
+Subject: [PATCH 2/4] ALSA: usb-audio: add implicit fb quirk for Axe-Fx III
+
+The Axe-Fx III implicit feedback end point and the data sink endpoint
+are in different interface descriptors. Add quirk to ensure a sync
+endpoint is properly configured.
+
+Signed-off-by: Alberto Aguirre <albaguirre@gmail.com>
+---
+ sound/usb/pcm.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/sound/usb/pcm.c b/sound/usb/pcm.c
+index 10a26b4ad547..6160aecd3d73 100644
+--- a/sound/usb/pcm.c
++++ b/sound/usb/pcm.c
+@@ -342,6 +342,10 @@ static int set_sync_ep_implicit_fb_quirk(struct snd_usb_substream *subs,
+ 		ep = 0x86;
+ 		ifnum = 2;
+ 		goto add_sync_ep_from_ifnum;
++	case USB_ID(0x2466, 0x8010): /* Fractal Audio Axe-Fx III */
++		ep = 0x81;
++		ifnum = 2;
++		goto add_sync_ep_from_ifnum;
+ 	}
+ 
+ 	if (attr == USB_ENDPOINT_SYNC_ASYNC &&
+-- 
+2.14.1
+

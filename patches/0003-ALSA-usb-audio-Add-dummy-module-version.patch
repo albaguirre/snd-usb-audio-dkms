@@ -1,0 +1,42 @@
+From 5a4644270cd854d0e9d8ac6fdb5300c4145d179c Mon Sep 17 00:00:00 2001
+From: Alberto Aguirre <albaguirre@gmail.com>
+Date: Mon, 16 Apr 2018 22:21:43 -0500
+Subject: [PATCH 3/4] ALSA: usb-audio: Add dummy module version
+
+Add dummy version so that DKMS doesn't fail the version check.
+
+Signed-off-by: Alberto Aguirre <albaguirre@gmail.com>
+---
+ sound/usb/card.c | 2 +-
+ sound/usb/midi.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/sound/usb/card.c b/sound/usb/card.c
+index 6640277a725b..e72b91a5f3e0 100644
+--- a/sound/usb/card.c
++++ b/sound/usb/card.c
+@@ -71,7 +71,7 @@ MODULE_AUTHOR("Takashi Iwai <tiwai@suse.de>");
+ MODULE_DESCRIPTION("USB Audio");
+ MODULE_LICENSE("GPL");
+ MODULE_SUPPORTED_DEVICE("{{Generic,USB Audio}}");
+-
++MODULE_VERSION("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+ 
+ static int index[SNDRV_CARDS] = SNDRV_DEFAULT_IDX;	/* Index 0-MAX */
+ static char *id[SNDRV_CARDS] = SNDRV_DEFAULT_STR;	/* ID for this card */
+diff --git a/sound/usb/midi.c b/sound/usb/midi.c
+index a35f41467237..e6c73d78ac7c 100644
+--- a/sound/usb/midi.c
++++ b/sound/usb/midi.c
+@@ -76,7 +76,7 @@
+ MODULE_AUTHOR("Clemens Ladisch <clemens@ladisch.de>");
+ MODULE_DESCRIPTION("USB Audio/MIDI helper module");
+ MODULE_LICENSE("Dual BSD/GPL");
+-
++MODULE_VERSION("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+ 
+ struct usb_ms_header_descriptor {
+ 	__u8  bLength;
+-- 
+2.14.1
+
