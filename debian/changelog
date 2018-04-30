@@ -1,3 +1,9 @@
+snd-usb-audio-dkms (4.15) bionic; urgency=medium
+
+  *  Sync snd-usb-audio source to 4.15
+
+ -- Alberto Aguirre <alberto.aguirre@canonical.com>  Mon, 30 Apr 2018 18:20:14 -0500
+
 snd-usb-audio-dkms (4.13) artful; urgency=medium
 
   * Sync snd-usb-audio source to 4.13
